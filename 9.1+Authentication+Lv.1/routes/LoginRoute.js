@@ -13,6 +13,6 @@ router.get('/', home);
 
 router.get('/login', getLogin).get('/register', getRegister);
 
-router.post('/login', postLogin).get('/register', postRegister);
+router.post('/login', postLogin).post('/register', postRegister);
 
 export default router;
