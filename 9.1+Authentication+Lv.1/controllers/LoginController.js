@@ -1,4 +1,4 @@
-import { createUser } from '../models/userModel.js';
+import { createUser, getUser } from '../models/userModel.js';
 
 export const home = (req, res) => {
   res.render('home.ejs');
@@ -24,6 +24,15 @@ export const postRegister = async (req, res) => {
 };
 
 export const postLogin = async (req, res) => {
-  const body = req.body;
-  console.log(body);
+  const userData = req.body;
+  const user = await getUser(userData);
+  if (!user) {
+    return res.redirect('login');
+  }
+
+  res.redirect('/secrets',);
+};
+
+export const secrets = (req, res) => {
+  res.render('secrets.ejs');
 };

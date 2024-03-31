@@ -18,4 +18,19 @@ export const createUser = async (userData) => {
   }
 };
 
-const getAllUsers = async () => {};
+export const getUser = async (userData) => {
+  try {
+    const { username, password } = userData;
+    const { rows } = await pool.query(
+      `
+    SELECT * FROM users
+    WHERE email = $1 AND password = $2
+    `,
+      [username, password]
+    );
+    return rows[0];
+  } catch (error) {
+    console.error('Error executing query', error.stack);
+    throw error;
+  }
+};
