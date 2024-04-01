@@ -25,12 +25,13 @@ export const postRegister = async (req, res) => {
 
 export const postLogin = async (req, res) => {
   const userData = req.body;
-  const user = await getUser(userData);
+  const user = await getUser(userData.username);
   if (!user) {
     return res.redirect('login');
   }
-
-  res.redirect('/secrets',);
+  if (user.password == userData.password) {
+    return res.render('secrets.ejs');
+  }
 };
 
 export const secrets = (req, res) => {

@@ -18,15 +18,13 @@ export const createUser = async (userData) => {
   }
 };
 
-export const getUser = async (userData) => {
+export const getUser = async (email) => {
   try {
-    const { username, password } = userData;
     const { rows } = await pool.query(
       `
     SELECT * FROM users
-    WHERE email = $1 AND password = $2
-    `,
-      [username, password]
+    WHERE email = $1`,
+      [email]
     );
     return rows[0];
   } catch (error) {
