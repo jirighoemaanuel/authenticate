@@ -1,14 +1,19 @@
 import pool from './db.js';
+import bcrypt from 'bcrypt';
+
+const saltRounds = 10;
 
 export const createUser = async (userData) => {
   try {
     const { username, password } = userData;
+
     const { rows } = await pool.query(
       `
       INSERT INTO users(email, password)
       VALUES($1, $2)
       RETURNING *
     `,
+
       [username, password]
     );
     return rows[0];
